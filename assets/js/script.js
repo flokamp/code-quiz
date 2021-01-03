@@ -1,4 +1,8 @@
-const question = document.getElementById("question")
+
+var question = document.getElementById("question")
+var timerEl = document.getElementById("timer")
+var secondsEl = document.getElementById('seconds');
+var startBtn = document.getElementById('start');
 
 // create array of question choices
 const choices = Array.from(document.getElementsByClassName("choice-text"));
@@ -12,6 +16,8 @@ let questionCounter = 0;
 let availableQuestions = [];
 const correctAnswer = 5;
 const maxQuestions = 10;
+var count = 120;
+
 
 // question array with question, choices and answer
 var questionsArr = [
@@ -42,16 +48,35 @@ var questionsArr = [
   ]; 
 
 // function to start quiz
-var startQuiz = function() {
+function startQuiz() {
   questionCounter = 0;
   score = 0;
   availableQuestions = [...questionsArr]
   console.log(availableQuestions)
+
+  // function to countdown time remaining
+  var interval = setInterval(function(){
+    if (count === 0){
+      clearInterval(interval);
+      return window.location.assign("/scores.html");
+    }
+    else {
+      timerEl.innerHTML= "Time left: " + count;
+      count--;
+    }
+  }, 1000);
+
   getNewQuestion();
 }
 
+
 // function to get random question from array
 var getNewQuestion= function() {
+
+  if (availableQuestions.length === 0 || questionCounter >= maxQuestions) {
+    return window.location.assign("/scores.html");
+  }
+
   // display random question each time
   questionCounter++;
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
@@ -73,14 +98,15 @@ var getNewQuestion= function() {
 // event listener for clicking on an answer choice
 choices.forEach(function(choice) {
   choice.addEventListener("click", function(e) {
-
     if (!acceptingAnswer) return;
+
     acceptingAnswer = false;
+    const selectedChoice = e.target;
     const selectedAnswer = selectedChoice.dataset["number"];
+    console.log(selectedAnswer);
 
     getNewQuestion();
   });
 });
-
 
 startQuiz();
