@@ -70,9 +70,15 @@ var getNewQuestion= function() {
   acceptingAnswer = true;
 };
 
+// event listener for clicking on an answer choice
 choices.forEach(function(choice) {
-  choice.addEventListener("click", function(){
-    console.log(target);
+  choice.addEventListener("click", function(e) {
+
+    if (!acceptingAnswer) return;
+    acceptingAnswer = false;
+    const selectedAnswer = selectedChoice.dataset["number"];
+
+    getNewQuestion();
   });
 });
 
