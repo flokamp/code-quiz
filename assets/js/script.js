@@ -6,7 +6,7 @@ console.log(choices);
 
 // quiz variables
 let currentQuestion = {};
-let acceptingAnswer = true;
+let acceptingAnswer = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
@@ -47,7 +47,34 @@ var startQuiz = function() {
   score = 0;
   availableQuestions = [...questionsArr]
   console.log(availableQuestions)
-
+  getNewQuestion();
 }
+
+// function to get random question from array
+var getNewQuestion= function() {
+  // display random question each time
+  questionCounter++;
+  const questionIndex = Math.floor(Math.random() * availableQuestions.length);
+  currentQuestion = availableQuestions[questionIndex];
+  question.innerText = currentQuestion.question;
+
+  // display answer choices with corresponding question
+  choices.forEach(function(choice) {
+    const number = choice.dataset["number"];
+    choice.innerText = currentQuestion["choice" + number];
+  });
+
+  // prevent answered questions from being displayed again
+  availableQuestions.splice(questionIndex, 1);
+
+  acceptingAnswer = true;
+};
+
+choices.forEach(function(choice) {
+  choice.addEventListener("click", function(){
+    console.log(target);
+  });
+});
+
 
 startQuiz();
