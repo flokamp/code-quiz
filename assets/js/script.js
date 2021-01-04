@@ -1,23 +1,20 @@
-
-var question = document.getElementById("question")
 var timerEl = document.getElementById("timer")
-var secondsEl = document.getElementById('seconds');
-var startBtn = document.getElementById('start');
+var questionEl = document.getElementById("question")
+var choiceEl = document.querySelectorAll("choice-container");
+var startBtn = document.getElementById("start");
 
 // create array of question choices
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-console.log(choices);
 
 // quiz variables
 let currentQuestion = {};
 let acceptingAnswer = false;
-let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
-const correctAnswer = 5;
+var userAnswer = '';
+let score = 0;
 const maxQuestions = 10;
 var count = 120;
-
 
 // question array with question, choices and answer
 var questionsArr = [
@@ -45,14 +42,13 @@ var questionsArr = [
       choice4: "scanning",
       answer: 3
     },
-  ]; 
+]; 
 
 // function to start quiz
 function startQuiz() {
   questionCounter = 0;
   score = 0;
   availableQuestions = [...questionsArr]
-  console.log(availableQuestions)
 
   // function to countdown time remaining
   var interval = setInterval(function(){
@@ -69,10 +65,8 @@ function startQuiz() {
   getNewQuestion();
 }
 
-
 // function to get random question from array
-var getNewQuestion= function() {
-
+var getNewQuestion = function() {
   if (availableQuestions.length === 0 || questionCounter >= maxQuestions) {
     return window.location.assign("/scores.html");
   }
@@ -87,26 +81,22 @@ var getNewQuestion= function() {
   choices.forEach(function(choice) {
     const number = choice.dataset["number"];
     choice.innerText = currentQuestion["choice" + number];
+    choice.addEventListener("click", showAnswer)
   });
+}
 
-  // prevent answered questions from being displayed again
-  availableQuestions.splice(questionIndex, 1);
 
-  acceptingAnswer = true;
-};
-
-// event listener for clicking on an answer choice
-choices.forEach(function(choice) {
-  choice.addEventListener("click", function(e) {
-    if (!acceptingAnswer) return;
-
-    acceptingAnswer = false;
-    const selectedChoice = e.target;
-    const selectedAnswer = selectedChoice.dataset["number"];
-    console.log(selectedAnswer);
-
-    getNewQuestion();
-  });
-});
+function showAnswer(e) {
+  var selectedAnswer = parseInt(e.target.dataset.number)
+  var correctAnswer = currentQuestion.answer;
+    if (selectedAnswer === correctAnswer) {
+      score++;
+    } else {
+      count = count - 5;
+    }
+    console.log(selectedAnswer)
+    console.log(correctAnswer)
+    console.log(score)
+}
 
 startQuiz();

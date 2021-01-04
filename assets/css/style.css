@@ -35,8 +35,9 @@ header a {
   width: 20%;
 }
 
-header h3 {
+header p {
   width: 20%;
+  text-align: left;
 }
 
 /* PAGE CONTENT STYLING */
