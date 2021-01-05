@@ -1,20 +1,11 @@
-var timerEl = document.getElementById("timer")
-var questionEl = document.getElementById("question")
-var choiceEl = document.querySelectorAll("choice-container");
-var startBtn = document.getElementById("start");
-
-// create array of question choices
-const choices = Array.from(document.getElementsByClassName("choice-text"));
-
-// quiz variables
-let currentQuestion = {};
-let acceptingAnswer = false;
-let questionCounter = 0;
-let availableQuestions = [];
-var userAnswer = '';
-let score = 0;
-const maxQuestions = 10;
-var count = 120;
+// select html elements
+const timerEl = document.getElementById("timer")
+const questionEl = document.getElementById("question")
+const choice1 = document.getElementById("1")
+const choice2 = document.getElementById("2")
+const choice3 = document.getElementById("3")
+const choice4 = document.getElementById("4")
+const choicesEl = document.getElementById("choices");
 
 // question array with question, choices and answer
 var questionsArr = [
@@ -24,7 +15,7 @@ var questionsArr = [
       choice2: "booleans",
       choice3: "alerts",
       choice4: "numbers",
-      answer: 3
+      correct: 3
     },
     {
       question: "A loop that never ends is referred to as:", 
@@ -32,7 +23,7 @@ var questionsArr = [
       choice2: "infinite loop",
       choice3: "recursive loop",
       choice4: "for loop",
-      answer: 4
+      correct: 4
     },
     {
       question: "The process of finding errors and fixing them within a program is called:", 
@@ -40,63 +31,53 @@ var questionsArr = [
       choice2: "executing",
       choice3: "debugging",
       choice4: "scanning",
-      answer: 3
+      correct: 3
     },
 ]; 
 
-// function to start quiz
-function startQuiz() {
-  questionCounter = 0;
-  score = 0;
-  availableQuestions = [...questionsArr]
+// declare quiz vairables
+let lastQuestion = questionsArr.length - 1;
+let currentQuestion = 0;
+let score = 0;
+let time = 120;
 
-  // function to countdown time remaining
-  var interval = setInterval(function(){
-    if (count === 0){
-      clearInterval(interval);
-      return window.location.assign("/scores.html");
-    }
-    else {
-      timerEl.innerHTML= "Time left: " + count;
-      count--;
-    }
-  }, 1000);
-
-  getNewQuestion();
-}
-
-// function to get random question from array
-var getNewQuestion = function() {
-  if (availableQuestions.length === 0 || questionCounter >= maxQuestions) {
-    return window.location.assign("/scores.html");
+// render a different question
+function newQuestion(){
+  // end game if all questions answered
+  if (currentQuestion > lastQuestion){
+    scoreRender();
+  } else {
+  // increase question count by one
+  currentQuestion++;
+  // display current question and choices
+  var q = questionsArr[currentQuestion];
+  question.innerText = q.question;
+  choice1.innerText = q.choice1;
+  choice2.innerText = q.choice2;
+  choice3.innerText = q.choice3;
+  choice4.innerText = q.choice4;
   }
-
-  // display random question each time
-  questionCounter++;
-  const questionIndex = Math.floor(Math.random() * availableQuestions.length);
-  currentQuestion = availableQuestions[questionIndex];
-  question.innerText = currentQuestion.question;
-
-  // display answer choices with corresponding question
-  choices.forEach(function(choice) {
-    const number = choice.dataset["number"];
-    choice.innerText = currentQuestion["choice" + number];
-    choice.addEventListener("click", showAnswer)
-  });
 }
 
+// start quiz timer and show first question
+function startQuiz(){
+  newQuestion();
+  setInterval(function() {
+    timerEl.innerHTML= "Time left: " + time;
+      time--;
+  }, 1000); 
+}
 
-function showAnswer(e) {
-  var selectedAnswer = parseInt(e.target.dataset.number)
-  var correctAnswer = currentQuestion.answer;
-    if (selectedAnswer === correctAnswer) {
+// check if selected answer is correct
+function checkAnswer(answer){
+  // add points for correct choice
+  if(answer == questionsArr[currentQuestion].correct){
       score++;
-    } else {
-      count = count - 5;
-    }
-    console.log(selectedAnswer)
-    console.log(correctAnswer)
-    console.log(score)
+  // deduct time for incorrect choice
+  }else{
+      time = time - 10;
+  }
+  newQuestion();
 }
 
 startQuiz();
