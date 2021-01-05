@@ -87,13 +87,12 @@ div {
   font-size: 32px;
 }
 
-.choice-container {
+div.choice-container {
   display: flex;
-  margin-bottom: 24px;
   font-size: 16px;
   border: 2px solid blue;
   background-color: white;
-  width: 40%;
+  width: 20%;
   border-radius: 4px;
 }
 
@@ -104,88 +103,14 @@ div {
   transition: transform 100ms;
 }
 
-.choice-prefix {
-  padding: 8px;
+h4 {
+  padding: 16px;
+  font-size: 16px;
   background-color: blue;
   color: white;
-  width: 16%;
-  text-align: center;
 }
 
-.choice-text {
-  padding: 8px;
-  margin-left: 16px;
-}
-
-/* SNACKBAR/FEEDBACK STYLING */
-#feedback {
-  visibility: hidden;
-  margin: 0 auto;
-  color: #fff; /* White text color */
-  text-align: left;
-  border-radius: 8px; /* Rounded borders */
-  left: 40px;
-  bottom: 40px;
-  padding: 16px 160px 16px 32px; /* Padding */
-  position: fixed;
-}
-
-/* Show the snackbar when clicking on a button (class added with JavaScript) */
-#feedback.show-correct {
-  visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 1.5s;
-  animation: fadein 0.5s, fadeout 0.5s 1.5s;
-  background-color: green;
-}
-
-#feedback.show-wrong {
-  visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 1.5s;
-  background-color: red;
-}
-
-/* Animations to fade the snackbar in and out */
-@-webkit-keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-  to {
-    bottom: 40px;
-    opacity: 1;
-  }
-}
-
-@keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-  to {
-    bottom: 40px;
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeout {
-  from {
-    bottom: 40px;
-    opacity: 1;
-  }
-  to {
-    bottom: 0;
-    opacity: 0;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    bottom: 40px;
-    opacity: 1;
-  }
-  to {
-    bottom: 0;
-    opacity: 0;
-  }
+.choice-container p {
+  padding: 12px;
+  align-items: center;
 }

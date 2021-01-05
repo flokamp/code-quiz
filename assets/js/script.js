@@ -1,11 +1,12 @@
 // select html elements
 const timerEl = document.getElementById("timer")
 const question = document.getElementById("question")
+const choiceLabel = document.querySelector("h4")
 const choice1 = document.getElementById("1")
 const choice2 = document.getElementById("2")
 const choice3 = document.getElementById("3")
 const choice4 = document.getElementById("4")
-var feedbackEl = document.getElementById("feedback");
+var choiceContainer = document.getElementsByClassName("choice-container")
 
 // question array with question, choices and answer
 var questionsArr = [
@@ -48,11 +49,11 @@ function newQuestion(){
   } else {
   // display current question and choices
   var q = questionsArr[currentQuestion];
-  question.innerText = q.question;
-  choice1.innerText = q.choice1;
-  choice2.innerText = q.choice2;
-  choice3.innerText = q.choice3;
-  choice4.innerText = q.choice4;
+  question.innerText += q.question;
+  choice1.innerHTML += ("<p>" + q.choice1 + "</p>");
+  choice2.innerHTML += ("<p>" + q.choice2 + "</p>");
+  choice3.innerHTML += ("<p>" + q.choice3 + "</p>");
+  choice4.innerHTML += ("<p>" + q.choice4 + "</p>");
   }
 }
 
@@ -70,21 +71,19 @@ function checkAnswer(answer){
   // show correct feedback and add points for correct choice
   if(answer == questionsArr[currentQuestion].correct){
       score++;
-      feedbackEl.className = ("show-correct");
-      feedbackEl.textContent = ("Correct!"); 
+      document.getElementById(answer).style.border = "solid green";
       setTimeout(function(){
-        feedbackEl.className = feedbackEl.className.replace("show-correct", "");
+        document.getElementById(answer).style.backgroundColor = "white";
         newQuestion();
-       }, 2000);
+       }, 1000);
+       newQuestion();
   //   // show wrong feedback and deduct time for incorrect choice
   }else{
       time = time - 10;
-      feedbackEl.className = ("show-wrong"); 
-      feedbackEl.textContent = ("Wrong!"); 
       setTimeout(function(){
-        feedbackEl.className = feedbackEl.className.replace("show-wrong", "");
         newQuestion();
-       }, 2000);
+       }, 1000);
+      
   }
   currentQuestion++;
 }
