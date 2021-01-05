@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Quiz Page</title>
+</head>
+<body>
+  <header>
+    <!-- Link to go back to quiz -->
+    <a href="index.html" class="btn">Back to Quiz</a>
+    <!-- Page title -->
+    <h1 class="page-title">Coding Quiz</h1>
+  </header> 
+
+  
+  <main class="page-content" id="page-content">
+    <!-- Score -->
+      <h3 id="final-score"></h3>
+      <form action="">
+          <input type="text" id="user-initials" name="user-initials" placeholder="Enter Initials">
+          <input type="submit" class="btn" id="submit">
+      </form>
+
+      <section id="high-score">
+          <table>
+            <tr>
+              <th id="initials">INITIALS</th>
+              <th id="score">SCORE</th>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+      </section>
+  </main>
+
+  <script src="./assets/js/script.js"></script>
+</body>
+</html>

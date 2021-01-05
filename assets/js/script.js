@@ -7,6 +7,7 @@ const choice2 = document.getElementById("2")
 const choice3 = document.getElementById("3")
 const choice4 = document.getElementById("4")
 var choiceContainer = document.getElementsByClassName("choice-container")
+var totalScore = document.querySelector("h3")
 
 // question array with question, choices and answer
 var questionsArr = [
@@ -35,7 +36,7 @@ var questionsArr = [
       correct: 3
     },
     {
-      question: "Which of the following if statements means x is NOT equal to 5?", 
+      question: "Which of the following statements means x is NOT equal to 5?", 
       choice1: "if x<>5",
       choice2: "if (x !=5)",
       choice3: "if x><5",
@@ -50,6 +51,46 @@ var questionsArr = [
       choice4: "/*this is a comment*/",
       correct: 1
     },
+    {
+      question: "Which character is used to indicate an end tag in HTML?", 
+      choice1: "*",
+      choice2: "^",
+      choice3: "/",
+      choice4: "]",
+      correct: 3
+    },
+    {
+      question: "Which HTML attribute specifies an alternate text for an image, if the image cannot be displayed?", 
+      choice1: "alt",
+      choice2: "class",
+      choice3: "src",
+      choice4: "id",
+      correct: 1
+    },
+    {
+      question: "In HTML, which attribute is used to specify that an input field must be filled out?", 
+      choice1: "required",
+      choice2: "placeholder",
+      choice3: "validate",
+      choice4: "formvalidate",
+      correct: 1
+    },
+    {
+      question: "What does CSS stand for?", 
+      choice1: "Colorful Style Sheets",
+      choice2: "Creative Style Sheets",
+      choice3: "Computer Style Sheets",
+      choice4: "Cascading Style Sheets",
+      correct: 4
+    },
+    {
+      question: "In CSS, which HTML attribute is used to define inline styles?", 
+      choice1: "style",
+      choice2: "class",
+      choice3: "styles",
+      choice4: "font",
+      correct: 1
+    },
 ]; 
 
 // declare quiz vairables
@@ -60,7 +101,7 @@ let time = 120;
 // render a different question
 function newQuestion(){
   // end game if all questions answered
-  if (currentQuestion > questionsArr.length - 1){
+  if (currentQuestion > questionsArr.length - 1 || time <= 0){
     scoreRender();
   } else {
   // display current question and choices
@@ -89,7 +130,7 @@ function checkAnswer(answer){
       score++;
       document.getElementById(answer).style.border = "solid green";
       document.getElementById(answer).style.backgroundColor = "lightgreen";
-      document.getElementById(answer).innerHTML = ("<p> Correct! </p>");
+      document.getElementById(answer).innerHTML += ("<div class='feedback correct'> Correct! </div>");
       setTimeout(function(){
         document.getElementById(answer).style.border = "solid blue";
         document.getElementById(answer).style.backgroundColor = "white";
@@ -98,19 +139,29 @@ function checkAnswer(answer){
   // show wrong feedback and deduct time for incorrect choice
   }else{
       time = time - 10;
-      setTimeout(function(){
         document.getElementById(answer).style.border = "solid red";
         document.getElementById(answer).style.backgroundColor = "pink";
-        document.getElementById(answer).innerHTML = ("<p> Incorrect! </p>");
+        document.getElementById(answer).innerHTML += ("<div class='feedback wrong'> Incorrect! </div>");
         setTimeout(function(){
         document.getElementById(answer).style.border = "solid blue";
         document.getElementById(answer).style.backgroundColor = "white";
         newQuestion();
        }, 1000);
-       }, 1000);
-      
   }
   currentQuestion++;
 }
+
+// show and save score render
+function scoreRender(){
+  window.open("scores.html");
+    
+    // calculate the amount of question percent answered by the user
+    
+   totalScore.textContent = "Your score is" + score;
+ 
+}
+
+
+
 
 startQuiz();
