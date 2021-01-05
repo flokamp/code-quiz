@@ -12,27 +12,43 @@ var choiceContainer = document.getElementsByClassName("choice-container")
 var questionsArr = [
     {
       question: "Commonly used data types DO NOT include:", 
-      choice1: "strings",
-      choice2: "booleans",
-      choice3: "alerts",
-      choice4: "numbers",
+      choice1: "Strings",
+      choice2: "Booleans",
+      choice3: "Alerts",
+      choice4: "Numbers",
       correct: 3
     },
     {
       question: "A loop that never ends is referred to as:", 
-      choice1: "while loop",
-      choice2: "infinite loop",
-      choice3: "recursive loop",
-      choice4: "for loop",
+      choice1: "While loop",
+      choice2: "Infinite loop",
+      choice3: "Recursive loop",
+      choice4: "For loop",
       correct: 4
     },
     {
       question: "The process of finding errors and fixing them within a program is called:", 
-      choice1: "compiling",
-      choice2: "executing",
-      choice3: "debugging",
-      choice4: "scanning",
+      choice1: "Compiling",
+      choice2: "Executing",
+      choice3: "Debugging",
+      choice4: "Scanning",
       correct: 3
+    },
+    {
+      question: "Which of the following if statements means x is NOT equal to 5?", 
+      choice1: "if x<>5",
+      choice2: "if (x !=5)",
+      choice3: "if x><5",
+      choice4: "if !=5",
+      correct: 2
+    },
+    {
+      question: "How do you add comments in Javascript?", 
+      choice1: "//this is a comment",
+      choice2: "(this is a comment)",
+      choice3: "!-- this is a comment --!",
+      choice4: "/*this is a comment*/",
+      correct: 1
     },
 ]; 
 
