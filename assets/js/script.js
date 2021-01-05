@@ -1,11 +1,11 @@
 // select html elements
 const timerEl = document.getElementById("timer")
-const questionEl = document.getElementById("question")
+const question = document.getElementById("question")
 const choice1 = document.getElementById("1")
 const choice2 = document.getElementById("2")
 const choice3 = document.getElementById("3")
 const choice4 = document.getElementById("4")
-const choicesEl = document.getElementById("choices");
+var feedbackEl = document.getElementById("feedback");
 
 // question array with question, choices and answer
 var questionsArr = [
@@ -36,7 +36,6 @@ var questionsArr = [
 ]; 
 
 // declare quiz vairables
-let lastQuestion = questionsArr.length - 1;
 let currentQuestion = 0;
 let score = 0;
 let time = 120;
@@ -44,11 +43,9 @@ let time = 120;
 // render a different question
 function newQuestion(){
   // end game if all questions answered
-  if (currentQuestion > lastQuestion){
+  if (currentQuestion > questionsArr.length - 1){
     scoreRender();
   } else {
-  // increase question count by one
-  currentQuestion++;
   // display current question and choices
   var q = questionsArr[currentQuestion];
   question.innerText = q.question;
@@ -70,14 +67,26 @@ function startQuiz(){
 
 // check if selected answer is correct
 function checkAnswer(answer){
-  // add points for correct choice
+  // show correct feedback and add points for correct choice
   if(answer == questionsArr[currentQuestion].correct){
       score++;
-  // deduct time for incorrect choice
+      feedbackEl.className = ("show-correct");
+      feedbackEl.textContent = ("Correct!"); 
+      setTimeout(function(){
+        feedbackEl.className = feedbackEl.className.replace("show-correct", "");
+        newQuestion();
+       }, 2000);
+  //   // show wrong feedback and deduct time for incorrect choice
   }else{
       time = time - 10;
+      feedbackEl.className = ("show-wrong"); 
+      feedbackEl.textContent = ("Wrong!"); 
+      setTimeout(function(){
+        feedbackEl.className = feedbackEl.className.replace("show-wrong", "");
+        newQuestion();
+       }, 2000);
   }
-  newQuestion();
+  currentQuestion++;
 }
 
 startQuiz();
