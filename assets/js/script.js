@@ -49,11 +49,11 @@ function newQuestion(){
   } else {
   // display current question and choices
   var q = questionsArr[currentQuestion];
-  question.innerText += q.question;
-  choice1.innerHTML += ("<p>" + q.choice1 + "</p>");
-  choice2.innerHTML += ("<p>" + q.choice2 + "</p>");
-  choice3.innerHTML += ("<p>" + q.choice3 + "</p>");
-  choice4.innerHTML += ("<p>" + q.choice4 + "</p>");
+  question.innerText = q.question;
+  choice1.innerHTML = ("<p> <b>A.</b> " + q.choice1 + "</p>");
+  choice2.innerHTML = ("<p> <b>B.</b> " + q.choice2 + "</p>");
+  choice3.innerHTML = ("<p> <b>C.</b> " + q.choice3 + "</p>");
+  choice4.innerHTML = ("<p> <b>D.</b> " + q.choice4 + "</p>");
   }
 }
 
@@ -72,16 +72,25 @@ function checkAnswer(answer){
   if(answer == questionsArr[currentQuestion].correct){
       score++;
       document.getElementById(answer).style.border = "solid green";
+      document.getElementById(answer).style.backgroundColor = "lightgreen";
+      document.getElementById(answer).innerHTML = ("<p> Correct! </p>");
       setTimeout(function(){
+        document.getElementById(answer).style.border = "solid blue";
         document.getElementById(answer).style.backgroundColor = "white";
         newQuestion();
        }, 1000);
-       newQuestion();
-  //   // show wrong feedback and deduct time for incorrect choice
+  // show wrong feedback and deduct time for incorrect choice
   }else{
       time = time - 10;
       setTimeout(function(){
+        document.getElementById(answer).style.border = "solid red";
+        document.getElementById(answer).style.backgroundColor = "pink";
+        document.getElementById(answer).innerHTML = ("<p> Incorrect! </p>");
+        setTimeout(function(){
+        document.getElementById(answer).style.border = "solid blue";
+        document.getElementById(answer).style.backgroundColor = "white";
         newQuestion();
+       }, 1000);
        }, 1000);
       
   }
