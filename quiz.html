@@ -8,35 +8,37 @@
 </head>
 <body>
   <header>
-    <!-- Link to view high scores -->
-    <a href="highscores.html" class="btn">View High Scores</a>
     <!-- Page title -->
-    <h1 class="page-title">Coding Quiz</h1>
-    <!-- Quiz Timer Countdown -->
-    <p id="timer">Time left: 120</p>
+    <h1 class="page-title">Coding Quiz</h2>
+    <a href="highscores.html" class="small-btn">View High Scores</a>
   </header> 
 
   <main class="page-content" id="page-content">
-    <!-- Quiz Question -->
-    <div id="question">
-    </div>
+    <section class="question-timer">
+      <!-- Quiz Question -->
+      <div id="question"></div>
+      <div><!-- Quiz Timer Countdown -->
+        <p id="timer"></p>
+        </div>
+    </section>
 
     <!-- Answer Choices -->
     <div id="choices">
-      <div class="choice-container" id="1" onclick="checkAnswer('1')">
+      <button class="choice-container" id="1" onclick="checkAnswer('1')">
         <p class="choice-text"></p>
-      </div>
-      <div class="choice-container" id="2" onclick="checkAnswer('2')">
+      </button>
+      <button class="choice-container" id="2" onclick="checkAnswer('2')">
         <p class="choice-text"></p>
-      </div>
-      <div class="choice-container" id="3" onclick="checkAnswer('3')">
+      </button>
+      <button class="choice-container" id="3" onclick="checkAnswer('3')">
         <p class="choice-text"></p>
-      </div>
-      <div class="choice-container" id="4" onclick="checkAnswer('4')">
+      </button>
+      <button class="choice-container" id="4" onclick="checkAnswer('4')">
         <p class="choice-text"></p>
-      </div>
+      </button>
     </div>
     <div id="feedback"></div>
+  
   </main>
 
   <script src="./assets/js/script.js"></script>

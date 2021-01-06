@@ -1,13 +1,10 @@
 // select html elements
 const timerEl = document.getElementById("timer")
 const question = document.getElementById("question")
-const choiceLabel = document.querySelector("h4")
 const choice1 = document.getElementById("1")
 const choice2 = document.getElementById("2")
 const choice3 = document.getElementById("3")
 const choice4 = document.getElementById("4")
-var choiceContainer = document.getElementsByClassName("choice-container")
-var totalScore = document.querySelector("h3")
 
 // question array with question, choices and answer
 var questionsArr = [
@@ -93,7 +90,7 @@ var questionsArr = [
     },
 ]; 
 
-// declare quiz vairables
+// gloabl quiz vairables
 let currentQuestion = 0;
 let score = 0;
 let time = 120;
@@ -102,25 +99,25 @@ let time = 120;
 function newQuestion(){
   // end game if all questions answered
   if (currentQuestion > questionsArr.length - 1 || time <= 0){
-    scoreRender();
+    return window.location.assign("scores.html");
   } else {
   // display current question and choices
   var q = questionsArr[currentQuestion];
   question.innerText = q.question;
-  choice1.innerHTML = ("<p> <b>A.</b> " + q.choice1 + "</p>");
-  choice2.innerHTML = ("<p> <b>B.</b> " + q.choice2 + "</p>");
-  choice3.innerHTML = ("<p> <b>C.</b> " + q.choice3 + "</p>");
-  choice4.innerHTML = ("<p> <b>D.</b> " + q.choice4 + "</p>");
+  choice1.innerHTML = ("<p>" + q.choice1 + "</p>");
+  choice2.innerHTML = ("<p>" + q.choice2 + "</p>");
+  choice3.innerHTML = ("<p>" + q.choice3 + "</p>");
+  choice4.innerHTML = ("<p>" + q.choice4 + "</p>");
   }
 }
 
 // start quiz timer and show first question
 function startQuiz(){
-  newQuestion();
   setInterval(function() {
-    timerEl.innerHTML= "Time left: " + time;
+    timerEl.innerHTML= time;
       time--;
   }, 1000); 
+  newQuestion();
 }
 
 // check if selected answer is correct
@@ -130,38 +127,26 @@ function checkAnswer(answer){
       score++;
       document.getElementById(answer).style.border = "solid green";
       document.getElementById(answer).style.backgroundColor = "lightgreen";
-      document.getElementById(answer).innerHTML += ("<div class='feedback correct'> Correct! </div>");
+      document.getElementById(answer).innerHTML += ("<div class='feedback correct'> CORRECT </div>");
       setTimeout(function(){
         document.getElementById(answer).style.border = "solid blue";
         document.getElementById(answer).style.backgroundColor = "white";
-        newQuestion();
-       }, 1000);
+       }, 500);
   // show wrong feedback and deduct time for incorrect choice
   }else{
       time = time - 10;
         document.getElementById(answer).style.border = "solid red";
         document.getElementById(answer).style.backgroundColor = "pink";
-        document.getElementById(answer).innerHTML += ("<div class='feedback wrong'> Incorrect! </div>");
+        document.getElementById(answer).innerHTML += ("<div class='feedback wrong'> INCORRECT </div>");
         setTimeout(function(){
         document.getElementById(answer).style.border = "solid blue";
         document.getElementById(answer).style.backgroundColor = "white";
-        newQuestion();
-       }, 1000);
+       }, 500);
   }
-  currentQuestion++;
+  setTimeout(function(){
+    currentQuestion++;
+    newQuestion();
+       }, 500);
 }
-
-// show and save score render
-function scoreRender(){
-  window.open("scores.html");
-    
-    // calculate the amount of question percent answered by the user
-    
-   totalScore.textContent = "Your score is" + score;
- 
-}
-
-
-
 
 startQuiz();

@@ -11,33 +11,35 @@ body {
 
 /* HEADER STYLING */
 header {
-  padding: 10px;
-  display: flex;
-  align-items: center;
   margin: 32px auto;
-  width: 80%;
+  width: 78%;
+  display: grid;
+  grid-template-columns: auto 200px;
+}
+
+header h2 {
+  font-weight: bold;
+  font-size: 32px;
+  text-align: left;
+}
+
+/* HIGHSCORES BUTTON */
+a.small-btn {
+  display: inline;
+  text-decoration: none;
+  color: blue;
+  border: solid blue;
+  padding: 10px 16px 10px 16px;
+  font-size: 16px;
+  border-radius: 4px;
   text-align: center;
 }
 
-header h1 {
-  font-weight: bold;
-  margin: 0 auto;
-  font-size: 32px;
-  width: 60%;
-}
-
-header a {
-  text-decoration: none;
-  color: blue;
-  padding: 10px;
-  font-size: 16px;
-  margin: 0;
-  width: 20%;
-}
-
-header p {
-  width: 20%;
-  text-align: left;
+a.small-btn:hover {
+  cursor: pointer;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+  transform: translateY(-0.1rem);
+  transition: transform 100ms;
 }
 
 /* PAGE CONTENT STYLING */
@@ -53,15 +55,16 @@ header p {
 .page-content h2 {
   margin-bottom: 24px;
   font-size: 24px;
-  display: inline-block;
-  width: 100%;
+  width: 80%;
 }
 
-.page-content p {
+.page-content li {
   font-size: 18px;
   line-height: 1.8;
+  margin-left: 32px;
 }
 
+/* STARTQUIZ BUTTON */
 .page-content a {
   text-decoration: none;
   color: white;
@@ -81,20 +84,43 @@ header p {
 }
 
 /* QUIZ STYLING */
+.question-timer {
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+}
+
+#timer {
+  font-size: 24px;
+  font-style: bold;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border-radius: 32px;
+}
 
 #question {
-  font-size: 32px;
+  font-size: 28px;
+  margin-bottom: 32px;
+  width: 80%;
+}
+
+/* ANSWER CHOICE ELEMENTS */
+button.choice-container {
+  display: flex;
+  border: solid blue;
+  background-color: white;
+  width: 50%;
+  border-radius: 4px;
+  padding-left: 12px;
   margin-bottom: 32px;
 }
 
-div.choice-container {
-  display: flex;
-  font-size: 16px;
-  border: 2px solid blue;
-  background-color: white;
-  width: 60%;
-  border-radius: 4px;
-  margin-bottom: 32px;
+.choice-container p {
+  display: in-line;
+  padding: 12px;
+  font-size: 18px;
+  width: 80%;
+  text-align: left;
 }
 
 .choice-container:hover {
@@ -105,17 +131,15 @@ div.choice-container {
 }
 
 .feedback {
-  padding: 4px;
+  padding: 6px;
   margin: 8px;
   display: in-line;
   font-size: 16px;
-  background-color: green;
   color: white;
   width: 20%;
   text-align: center;
   align-items: center;
   border-radius: 4px;
-  line-height: 2;
 }
 
 .correct {
@@ -124,13 +148,6 @@ div.choice-container {
 
 .wrong {
   background-color: red;
-}
-
-.choice-container p {
-  display: in-line;
-  padding: 12px;
-  align-items: left;
-  width: 80%;
 }
 
 /* SCORE PAGE STYLING */
@@ -197,6 +214,6 @@ table {
 
 td,
 th {
-  padding: 32x;
+  width: 50%;
   margin: 0 auto;
 }

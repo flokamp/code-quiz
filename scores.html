@@ -8,19 +8,18 @@
 </head>
 <body>
   <header>
-    <!-- Link to go back to quiz -->
-    <a href="index.html" class="btn">Back to Quiz</a>
     <!-- Page title -->
-    <h1 class="page-title">Coding Quiz</h1>
+    <h1 class="page-title">Coding Quiz</h2>
+    <a href="index.html" class="small-btn">Retake Quiz</a>
   </header> 
 
-  
   <main class="page-content" id="page-content">
+  <div id="score-card">
     <!-- Score -->
       <h3 id="final-score"></h3>
       <form action="">
           <input type="text" id="user-initials" name="user-initials" placeholder="Enter Initials">
-          <input type="submit" class="btn" id="submit">
+          <input type="submit" class="btn" id="submit" onclick="saveUserScore">
       </form>
 
       <section id="high-score">
@@ -30,11 +29,12 @@
               <th id="score">SCORE</th>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td id="display-initials"></td>
+              <td id="display-score"></td>
             </tr>
           </table>
       </section>
+    </div>
   </main>
 
   <script src="./assets/js/script.js"></script>
